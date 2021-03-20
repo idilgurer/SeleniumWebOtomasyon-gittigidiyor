@@ -21,10 +21,21 @@ public class ProductTest extends BaseTest{
         js.executeScript("window.scroll(0,550)");
         Thread.sleep(1000);
         driver.findElement(By.id("add-to-basket")).click();
+        
+        //liste ürün fiyatı
+        WebElement element = driver.findElement(By.cssSelector("#sp-price"));
+        String listPrice = element.getAttribute("value");
+        System.out.println("Seçilen ürünün fiyatı : " +listPrice);
 
-       //Sepete git
+        //Sepete git
         Thread.sleep(1000);
         driver.findElement(By.xpath("//*[text()='Sepete Git']")).click();
+        
+        //sepet ürün fiyatı ve liste ürün fiyatı ile karşılaştırılması
+        WebElement element1 = driver.findElement(By.cssSelector(".data-salePrice"));
+        String basketPrice = element1.getAttribute("value");
+        System.out.println("Sepetteki ürünün fiyatı : " +basketPrice);
+        //Assert.assertEquals(basketPrice, listPrice);
 
         //Adet Sayısı 2ye çıkarılır.
         Thread.sleep(500);
@@ -32,12 +43,8 @@ public class ProductTest extends BaseTest{
 
         //Sepetten ürün silinir
         Thread.sleep(2000);
-       driver.findElement(By.className("btn-delete")).click();
+        driver.findElement(By.className("btn-delete")).click();
 
        }
 }
-
-
-
-
 
